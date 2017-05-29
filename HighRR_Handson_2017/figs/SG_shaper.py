@@ -71,16 +71,16 @@ def ampNormalize(x):
     
 
 def activeWaveform(t):
-    return np.exp(-t)*np.sin(t)
+    return np.exp(-t)*(t - np.sin(t))
 
 plt.figure(3)
-plt.plot(t, ampNormalize(vo(t,1)),label="CR-RC",color='red')
-plt.plot(t, ampNormalize(activeWaveform(t)),label="active filter",color='green')
+plt.plot(t/np.sqrt(7), ampNormalize(vo(t,4)),label=r"$CR-(RC)^4$",color='red')
+plt.plot(2*t/np.sqrt(11), ampNormalize(activeWaveform(t)),label="active filter",color='green')
 
 plt.legend(loc='best')
-plt.title("Normalized waveform of $CR-RC$ and active filter",fontsize=14)
-plt.xlabel(r"$t/\tau$",fontsize=14)
-plt.xlim(0,8)
+plt.title("Normalized waveform of $CR-(RC)^4$ and active filter",fontsize=14)
+plt.xlabel(r"$t/\tau_{opt}$",fontsize=14)
+plt.xlim(0,6)
 plt.ylim(-0.2,1.2)
 plt.ylabel("Normalized waveform",fontsize=14)
 plt.grid()
